@@ -21,7 +21,7 @@ ArLive2Pusher::ArLive2Pusher(ArLive2Engine*pEngine, const std::string& strPushId
 	, b_audio_captured_(false)
 	, b_video_captured_(false)
 	, audio_quality_(ArLiveAudioQualityDefault)
-	, video_quality_(ArLiveVideoResolution640x360)
+	//, video_quality_(ArLiveVideoResolution640x360)
 	, b_snap_shot_(false)
 	, b_enable_custom_video_capture_(false)
 	, b_enable_custom_audio_capture_(false)

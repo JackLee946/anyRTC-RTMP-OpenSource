@@ -384,18 +384,18 @@ struct V2_API ArLiveVideoEncoderParam {
     ///【推荐取值】ArLiveVideoScaleModeAuto可以保证图像的完整性，但是大小会与设置的略有不同
     ArLiveVideoScaleMode videoScaleMode;
 
-    ArLiveVideoEncoderParam(ArLiveVideoResolution resolution)
-        : videoResolution(resolution)
-#if defined(WEBRTC_WIN) | defined(WEBRTC_MAC)
-        , videoResolutionMode(ArLiveVideoResolutionModeLandscape)
-#else
-        , videoResolutionMode(ArLiveVideoResolutionModePortrait)
-#endif
-        , videoFps(15)
-        , videoBitrate(900)
-        , minVideoBitrate(500)
-        , videoScaleMode(ArLiveVideoScaleModeAuto)
-         {};
+//     ArLiveVideoEncoderParam(ArLiveVideoResolution resolution)
+//         : videoResolution(resolution)
+// #if defined(WEBRTC_WIN) | defined(WEBRTC_MAC)
+//         , videoResolutionMode(ArLiveVideoResolutionModeLandscape)
+// #else
+//         , videoResolutionMode(ArLiveVideoResolutionModePortrait)
+// #endif
+//         , videoFps(15)
+//         , videoBitrate(900)
+//         , minVideoBitrate(500)
+//         , videoScaleMode(ArLiveVideoScaleModeAuto)
+//          {};
 };
 
 /**

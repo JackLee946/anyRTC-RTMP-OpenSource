@@ -329,11 +329,11 @@ int32_t ArLive2Engine::RecordedDataIsAvailable(const void* audioSamples, const s
 		itadr++;
 	}
 
-	if (rtc_adm_ != NULL)
-	{
-		webrtc::AudioSinkInterface::Data audData((int16_t*)audioSamples, nSamples, samplesPerSec, nChannels, rtc::Time32());
-		((webrtc::AudioDeviceDummy*)rtc_adm_->DummyDevice())->SetRecordAudioData(audData);
-	}
+	//if (rtc_adm_ != NULL)
+	//{
+	//	webrtc::AudioSinkInterface::Data audData((int16_t*)audioSamples, nSamples, samplesPerSec, nChannels, rtc::Time32());
+	//	((webrtc::AudioDeviceDummy*)rtc_adm_->DummyDevice())->SetRecordAudioData(audData);
+	//}
 	return 0;
 }
 
@@ -356,15 +356,15 @@ int32_t ArLive2Engine::NeedMorePlayData(const size_t nSamples, const size_t nByt
 	int samples_per_channel_int = samplesPerSec / 100;
 	nSamplesOut = samples_per_channel_int * nChannels;
 
-	if (rtc_adm_ != NULL)
-	{
-		char pData[1920];
-		uint32_t nSampleHz = 48000;
-		size_t nChannel = 1;
-		{
-			((webrtc::AudioDeviceDummy*)rtc_adm_->DummyDevice())->GetNeedPlayAudio(pData, nSampleHz, nChannel);
-		}
-	}
+	//if (rtc_adm_ != NULL)
+	//{
+	//	char pData[1920];
+	//	uint32_t nSampleHz = 48000;
+	//	size_t nChannel = 1;
+	//	{
+	//		((webrtc::AudioDeviceDummy*)rtc_adm_->DummyDevice())->GetNeedPlayAudio(pData, nSampleHz, nChannel);
+	//	}
+	//}
 	return 0;
 }
 

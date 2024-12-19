@@ -38,10 +38,10 @@ class AudioDeviceDummy : public AudioDeviceGeneric {
         _recordingFramesLeft(0),
         total_delay_in_milliseconds_(20) {}
   virtual ~AudioDeviceDummy() {}
-  //* Play audio
-  int GetNeedPlayAudio(void* audioSamples, uint32_t& samplesPerSec, size_t& nChannels);
-  //* Recod audio
-  void SetRecordAudioData(const AudioSinkInterface::Data& audio);
+  ////* Play audio
+  //int GetNeedPlayAudio(void* audioSamples, uint32_t& samplesPerSec, size_t& nChannels);
+  ////* Recod audio
+  //void SetRecordAudioData(const AudioSinkInterface::Data& audio);
 
   // Retrieve the currently utilized audio layer
   int32_t ActiveAudioLayer(
