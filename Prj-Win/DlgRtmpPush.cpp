@@ -21,7 +21,7 @@
 
 // DlgRtmpPush ¶Ô»°¿ò
 
-#define PUSH_URL ""
+#define PUSH_URL "rtmp://182.92.85.132/live/livestream"
 
 IMPLEMENT_DYNAMIC(DlgRtmpPush, CDialog)
 

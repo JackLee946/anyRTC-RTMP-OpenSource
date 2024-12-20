@@ -34,6 +34,21 @@
     <Filter Include="pusher">
       <UniqueIdentifier>{85139ba3-1673-45fb-b65a-c3ba23f6f5f0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="nvcodec">
+      <UniqueIdentifier>{3b0fe857-c852-4489-9ed5-9bd37e343391}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nvcodec\NvEncoder">
+      <UniqueIdentifier>{bfe3c606-d5f8-46c0-a88b-7767b27b0bb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="qsvcodec">
+      <UniqueIdentifier>{ec180d08-c5f6-49db-9afb-652019741555}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="qsvcodec\src">
+      <UniqueIdentifier>{d5152f64-7577-41e9-9898-2d13b4722e71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="encoder">
+      <UniqueIdentifier>{7a0c22bf-3080-40f1-a0f7-e79dab1cbed4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="codec\AvCodec.h">
@@ -131,6 +146,72 @@
     </ClInclude>
     <ClInclude Include="SeiMsg.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\NvCodec\NvEncoder\nvEncodeAPI.h">
+      <Filter>nvcodec\NvEncoder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\NvCodec\NvEncoder\NvEncoder.h">
+      <Filter>nvcodec\NvEncoder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\NvCodec\NvEncoder\NvEncoderD3D11.h">
+      <Filter>nvcodec\NvEncoder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\QsvCodec\src\mfx_critical_section.h">
+      <Filter>qsvcodec\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\QsvCodec\src\mfx_dispatcher.h">
+      <Filter>qsvcodec\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\QsvCodec\src\mfx_dispatcher_defs.h">
+      <Filter>qsvcodec\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\QsvCodec\src\mfx_dispatcher_log.h">
+      <Filter>qsvcodec\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\QsvCodec\src\mfx_dxva2_device.h">
+      <Filter>qsvcodec\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\QsvCodec\src\mfx_exposed_functions_list.h">
+      <Filter>qsvcodec\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\QsvCodec\src\mfx_library_iterator.h">
+      <Filter>qsvcodec\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\QsvCodec\src\mfx_load_dll.h">
+      <Filter>qsvcodec\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\QsvCodec\src\mfx_load_plugin.h">
+      <Filter>qsvcodec\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\QsvCodec\src\mfx_plugin_hive.h">
+      <Filter>qsvcodec\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\QsvCodec\src\mfx_vector.h">
+      <Filter>qsvcodec\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\QsvCodec\src\mfx_win_reg_key.h">
+      <Filter>qsvcodec\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\QsvCodec\src\mfxaudio_exposed_functions_list.h">
+      <Filter>qsvcodec\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\QsvCodec\common_directx9.h">
+      <Filter>qsvcodec</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\QsvCodec\common_directx11.h">
+      <Filter>qsvcodec</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\QsvCodec\common_utils.h">
+      <Filter>qsvcodec</Filter>
+    </ClInclude>
+    <ClInclude Include="encoder\nvidia_d3d11_encoder.h">
+      <Filter>encoder</Filter>
+    </ClInclude>
+    <ClInclude Include="encoder\video_encoder.h">
+      <Filter>encoder</Filter>
+    </ClInclude>
+    <ClInclude Include="encoder\intel_d3d_encoder.h">
+      <Filter>encoder</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -289,6 +370,72 @@
     </ClCompile>
     <ClCompile Include="codec\aacdecode.cc">
       <Filter>codec</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\NvCodec\NvEncoder\NvEncoder.cpp">
+      <Filter>nvcodec\NvEncoder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\NvCodec\NvEncoder\NvEncoderD3D11.cpp">
+      <Filter>nvcodec\NvEncoder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\QsvCodec\src\mfx_critical_section.cpp">
+      <Filter>qsvcodec\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\QsvCodec\src\mfx_dispatcher.cpp">
+      <Filter>qsvcodec\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\QsvCodec\src\mfx_dispatcher_log.cpp">
+      <Filter>qsvcodec\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\QsvCodec\src\mfx_dxva2_device.cpp">
+      <Filter>qsvcodec\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\QsvCodec\src\mfx_function_table.cpp">
+      <Filter>qsvcodec\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\QsvCodec\src\mfx_library_iterator.cpp">
+      <Filter>qsvcodec\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\QsvCodec\src\mfx_load_dll.cpp">
+      <Filter>qsvcodec\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\QsvCodec\src\mfx_load_plugin.cpp">
+      <Filter>qsvcodec\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\QsvCodec\src\mfx_plugin_hive.cpp">
+      <Filter>qsvcodec\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\QsvCodec\src\mfx_win_reg_key.cpp">
+      <Filter>qsvcodec\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\QsvCodec\src\qsv_main.cpp">
+      <Filter>qsvcodec\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\QsvCodec\common_directx9.cpp">
+      <Filter>qsvcodec</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\QsvCodec\common_directx11.cpp">
+      <Filter>qsvcodec</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\QsvCodec\common_utils.cpp">
+      <Filter>qsvcodec</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\QsvCodec\common_utils_windows.cpp">
+      <Filter>qsvcodec</Filter>
+    </ClCompile>
+    <ClCompile Include="encoder\intel_d3d_encoder.cc">
+      <Filter>encoder</Filter>
+    </ClCompile>
+    <ClCompile Include="encoder\nvidia_d3d11_encoder.cc">
+      <Filter>encoder</Filter>
+    </ClCompile>
+    <ClCompile Include="ExternalVideoEncoderFactory.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="nv_encoder.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="qsv_encoder.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

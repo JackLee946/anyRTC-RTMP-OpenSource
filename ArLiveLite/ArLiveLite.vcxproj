@@ -150,18 +150,37 @@
       <SDLCheck>false</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <PreprocessorDefinitions>NOMINMAX;WEBRTC_WIN;_CRT_SECURE_NO_WARNINGS;_WINSOCK_DEPRECATED_NO_WARNINGS;WEBRTC_INCLUDE_INTERNAL_AUDIO_DEVICE;OS_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>./;./include;./include/webrtc;./include/webrtc/third_party/abseil-cpp;./pusher;./player;./rtmp/include;./rtmp/libaio/include;./rtmp/libflv/include;./rtmp/librtmp/aio;./rtmp/librtmp/include;../VideoRender;../third_party;../third_party/faac-1.28/include;../third_party/faad2-2.7/include;../third_party/ffmpeg</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./;./include;./include/webrtc;./include/webrtc/third_party/abseil-cpp;./pusher;./encoder;./player;./rtmp/include;./rtmp/libaio/include;./rtmp/libflv/include;./rtmp/librtmp/aio;./rtmp/librtmp/include;../VideoRender;../third_party;../third_party/faac-1.28/include;../third_party/faad2-2.7/include;../third_party/ffmpeg;../third_party/QsvCodec/include;../third_party/QsvCodec;../third_party/NvCodec;../third_party/libyuv/include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>ws2_32.lib;winmm.lib;msimg32.lib;usp10.lib;psapi.lib;shlwapi.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;delayimp.lib;credui.lib;netapi32.lib;crypt32.lib;iphlpapi.lib;secur32.lib;dmoguids.lib;wmcodecdspuuid.lib;amstrmid.lib;msdmo.lib;Strmiids.lib;libcmtd.lib;Wininet.lib;webrtc.lib;avcodec.lib;avfilter.lib;avformat.lib;avutil.lib;swresample.lib;swscale.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d9.lib;dxva2.lib;d3d11.lib;dxgi.lib;dmoguids.lib;wmcodecdspuuid.lib;ws2_32.lib;winmm.lib;msimg32.lib;usp10.lib;psapi.lib;shlwapi.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;delayimp.lib;credui.lib;netapi32.lib;crypt32.lib;iphlpapi.lib;secur32.lib;amstrmid.lib;msdmo.lib;Strmiids.lib;libcmtd.lib;Wininet.lib;webrtc.lib;avcodec.lib;avfilter.lib;avformat.lib;avutil.lib;swresample.lib;swscale.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>../third_lib/win_x64;../third_lib/ffmpeg_win/x64_lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\third_party\NvCodec\NvEncoder\nvEncodeAPI.h" />
+    <ClInclude Include="..\third_party\NvCodec\NvEncoder\NvEncoder.h" />
+    <ClInclude Include="..\third_party\NvCodec\NvEncoder\NvEncoderD3D11.h" />
+    <ClInclude Include="..\third_party\QsvCodec\common_directx11.h" />
+    <ClInclude Include="..\third_party\QsvCodec\common_directx9.h" />
+    <ClInclude Include="..\third_party\QsvCodec\common_utils.h" />
+    <ClInclude Include="..\third_party\QsvCodec\src\mfxaudio_exposed_functions_list.h" />
+    <ClInclude Include="..\third_party\QsvCodec\src\mfx_critical_section.h" />
+    <ClInclude Include="..\third_party\QsvCodec\src\mfx_dispatcher.h" />
+    <ClInclude Include="..\third_party\QsvCodec\src\mfx_dispatcher_defs.h" />
+    <ClInclude Include="..\third_party\QsvCodec\src\mfx_dispatcher_log.h" />
+    <ClInclude Include="..\third_party\QsvCodec\src\mfx_dxva2_device.h" />
+    <ClInclude Include="..\third_party\QsvCodec\src\mfx_exposed_functions_list.h" />
+    <ClInclude Include="..\third_party\QsvCodec\src\mfx_library_iterator.h" />
+    <ClInclude Include="..\third_party\QsvCodec\src\mfx_load_dll.h" />
+    <ClInclude Include="..\third_party\QsvCodec\src\mfx_load_plugin.h" />
+    <ClInclude Include="..\third_party\QsvCodec\src\mfx_plugin_hive.h" />
+    <ClInclude Include="..\third_party\QsvCodec\src\mfx_vector.h" />
+    <ClInclude Include="..\third_party\QsvCodec\src\mfx_win_reg_key.h" />
     <ClInclude Include="ArLive2Engine.h" />
     <ClInclude Include="ArLive2Player.h" />
     <ClInclude Include="ArLive2Pusher.h" />
@@ -169,6 +188,9 @@
     <ClInclude Include="ArNetTcpClient.h" />
     <ClInclude Include="AudDeviceEvent.h" />
     <ClInclude Include="codec\AvCodec.h" />
+    <ClInclude Include="encoder\intel_d3d_encoder.h" />
+    <ClInclude Include="encoder\nvidia_d3d11_encoder.h" />
+    <ClInclude Include="encoder\video_encoder.h" />
     <ClInclude Include="H264SeiPack.h" />
     <ClInclude Include="IArLive2Engine.h" />
     <ClInclude Include="include\ArLiveCode.hpp" />
@@ -196,6 +218,23 @@
     <ClInclude Include="WinVideoTrackSource.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\third_party\NvCodec\NvEncoder\NvEncoder.cpp" />
+    <ClCompile Include="..\third_party\NvCodec\NvEncoder\NvEncoderD3D11.cpp" />
+    <ClCompile Include="..\third_party\QsvCodec\common_directx11.cpp" />
+    <ClCompile Include="..\third_party\QsvCodec\common_directx9.cpp" />
+    <ClCompile Include="..\third_party\QsvCodec\common_utils.cpp" />
+    <ClCompile Include="..\third_party\QsvCodec\common_utils_windows.cpp" />
+    <ClCompile Include="..\third_party\QsvCodec\src\mfx_critical_section.cpp" />
+    <ClCompile Include="..\third_party\QsvCodec\src\mfx_dispatcher.cpp" />
+    <ClCompile Include="..\third_party\QsvCodec\src\mfx_dispatcher_log.cpp" />
+    <ClCompile Include="..\third_party\QsvCodec\src\mfx_dxva2_device.cpp" />
+    <ClCompile Include="..\third_party\QsvCodec\src\mfx_function_table.cpp" />
+    <ClCompile Include="..\third_party\QsvCodec\src\mfx_library_iterator.cpp" />
+    <ClCompile Include="..\third_party\QsvCodec\src\mfx_load_dll.cpp" />
+    <ClCompile Include="..\third_party\QsvCodec\src\mfx_load_plugin.cpp" />
+    <ClCompile Include="..\third_party\QsvCodec\src\mfx_plugin_hive.cpp" />
+    <ClCompile Include="..\third_party\QsvCodec\src\mfx_win_reg_key.cpp" />
+    <ClCompile Include="..\third_party\QsvCodec\src\qsv_main.cpp" />
     <ClCompile Include="ArLive2Engine.cpp" />
     <ClCompile Include="ArLive2Player.cpp" />
     <ClCompile Include="ArLive2Pusher.cpp" />
@@ -204,14 +243,19 @@
     <ClCompile Include="codec\aacdecode.cc" />
     <ClCompile Include="codec\aacencode.cc" />
     <ClCompile Include="codec\AvCodec.cc" />
+    <ClCompile Include="encoder\intel_d3d_encoder.cc" />
+    <ClCompile Include="encoder\nvidia_d3d11_encoder.cc" />
+    <ClCompile Include="ExternalVideoEncoderFactory.cpp" />
     <ClCompile Include="H264SeiPack.cpp" />
     <ClCompile Include="MgrRender.cpp" />
+    <ClCompile Include="nv_encoder.cpp" />
     <ClCompile Include="PlatformImpl.cpp" />
     <ClCompile Include="PlayBuffer.cpp" />
     <ClCompile Include="player\FFBuffer.cpp" />
     <ClCompile Include="player\ARFFPlayer.cpp" />
     <ClCompile Include="player\sonic.c" />
     <ClCompile Include="pusher\ARRtmpPusher.cpp" />
+    <ClCompile Include="qsv_encoder.cpp" />
     <ClCompile Include="RtcTick.cpp" />
     <ClCompile Include="rtmp\libflv\source\amf0.c" />
     <ClCompile Include="rtmp\libflv\source\amf3.c" />

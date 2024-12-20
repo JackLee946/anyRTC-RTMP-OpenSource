@@ -31,6 +31,10 @@
 #include "sdk/objc/native/src/objc_video_decoder_factory.h"
 #include "api/call/audio_sink.h"
 #endif
+#ifdef WEBRTC_WIN
+#include "ExternalVideoEncoderFactory.h"
+#endif // WEBRTC_WIN
+
 
 static const char sess_ascii[65] = {
 	'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
@@ -158,6 +162,8 @@ AR::IArLivePusher* ArLive2Engine::createArLivePusher()
 #if WEBRTC_IOS
     std::unique_ptr<webrtc::VideoEncoderFactory> video_apple_encoder_factory_ = webrtc::ObjCToNativeVideoEncoderFactory([[RTCVideoEncoderFactoryH264 alloc] init]);
     arLivePuser->setExVideoEncoderFactory(video_apple_encoder_factory_.release());
+#else if WEBRTC_WIN
+
 #endif
 	return arLivePuser;
 }
