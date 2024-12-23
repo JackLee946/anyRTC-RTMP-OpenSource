@@ -770,7 +770,7 @@ void ArLive2Pusher::initVideoWithParameters(int nType, int videoWidth, int video
 	h264_encoder_ = new webrtc::V_H264Encoder(*this);
 	h264_encoder_->SetParameter(videoWidth, videoHeight, videoFps, videoBitrate);
 	h264_encoder_->SetVideoScaleMode((webrtc::VideoScaleMode)video_quality_.videoScaleMode);
-#if TARGET_PLATFORM_PHONE
+#if WEBRTC_WIN 
 	if (exVideo_encoder_factory != NULL) {
 		h264_encoder_->SetExVideoEncoderFactory(exVideo_encoder_factory);
 	}

@@ -35,17 +35,15 @@ public:
 	std::unique_ptr<webrtc::VideoEncoder> CreateVideoEncoder(
 		const webrtc::SdpVideoFormat& format) override {
 		if (absl::EqualsIgnoreCase(format.name, cricket::kH264CodecName)) {
-			if (webrtc::H264Encoder::IsSupported()) {
-				if (xop::NvidiaD3D11Encoder::IsSupported()) {
-					return absl::make_unique<webrtc::NvEncoder>(cricket::VideoCodec(format));
-				}
-				else if (xop::IntelD3DEncoder::IsSupported()) {
-					return absl::make_unique<webrtc::QsvEncoder>(cricket::VideoCodec(format));
-				}
-				else {
-					return webrtc::H264Encoder::Create(cricket::VideoCodec(format));
-				}
-			}			
+			if (xop::NvidiaD3D11Encoder::IsSupported()) {
+				return absl::make_unique<webrtc::NvEncoder>(cricket::VideoCodec(format));
+			}
+			else if (xop::IntelD3DEncoder::IsSupported()) {
+				return absl::make_unique<webrtc::QsvEncoder>(cricket::VideoCodec(format));
+			}
+			else {
+				return webrtc::H264Encoder::Create(cricket::VideoCodec(format));
+			}
 		}
 
 		return nullptr;

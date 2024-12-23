@@ -159,11 +159,12 @@ AR::IArLivePusher* ArLive2Engine::createArLivePusher()
 	}
 	ArLive2Pusher* arLivePuser = new ArLive2Pusher(this, strPushId);
 	map_arlive2_pusher_[strPushId] = arLivePuser;
-#if WEBRTC_IOS
+#ifdef WEBRTC_IOS
     std::unique_ptr<webrtc::VideoEncoderFactory> video_apple_encoder_factory_ = webrtc::ObjCToNativeVideoEncoderFactory([[RTCVideoEncoderFactoryH264 alloc] init]);
     arLivePuser->setExVideoEncoderFactory(video_apple_encoder_factory_.release());
-#else if WEBRTC_WIN
-
+#elif WEBRTC_WIN
+	std::unique_ptr<webrtc::VideoEncoderFactory> video_win_encoder_factory_ = webrtc::CreateBuiltinExternalVideoEncoderFactory();
+	arLivePuser->setExVideoEncoderFactory(video_win_encoder_factory_.release());
 #endif
 	return arLivePuser;
 }

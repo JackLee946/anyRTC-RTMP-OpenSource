@@ -73,10 +73,7 @@ VideoFrameType ConvertToVideoFrameType(EVideoFrameType type) {
 
 }  // namespace
 
-static void RtpFragmentize(EncodedImage* encoded_image,
-                           const VideoFrameBuffer& frame_buffer,
-                           std::vector<uint8_t>& frame_packet,
-                           RTPFragmentationHeader* frag_header) 
+static void RtpFragmentize(EncodedImage* encoded_image, std::vector<uint8_t>& frame_packet) 
 {
 	size_t required_capacity = 0;
 	encoded_image->set_size(0);
@@ -84,22 +81,8 @@ static void RtpFragmentize(EncodedImage* encoded_image,
 	required_capacity = frame_packet.size();
 	encoded_image->SetEncodedData(EncodedImageBuffer::Create(required_capacity));
 
-	// TODO(nisse): Use a cache or buffer pool to avoid allocation?
-	encoded_image->SetEncodedData(EncodedImageBuffer::Create(required_capacity));
+	memcpy((uint8_t*)encoded_image->data(), &frame_packet[0], frame_packet.size());
 
-	memcpy(encoded_image->data(), &frame_packet[0], frame_packet.size());
-
-	std::vector<webrtc::H264::NaluIndex> nalus = webrtc::H264::FindNaluIndices(
-		encoded_image->data(), encoded_image->size());
-
-	size_t fragments_count = nalus.size();
-
-	frag_header->VerifyAndAllocateFragmentationHeader(fragments_count);
-
-	for (size_t i = 0; i < nalus.size(); i++) {
-		frag_header->fragmentationOffset[i] = nalus[i].payload_start_offset;
-		frag_header->fragmentationLength[i] = nalus[i].payload_size;
-	}
 }
 
 NvEncoder::NvEncoder(const cricket::VideoCodec& codec)
@@ -220,7 +203,6 @@ int32_t NvEncoder::InitEncode(const VideoCodec* inst,
 		const size_t new_capacity = CalcBufferSize(VideoType::kI420, 
 			codec_.simulcastStream[idx].width, codec_.simulcastStream[idx].height);
 		encoded_images_[i].SetEncodedData(EncodedImageBuffer::Create(new_capacity));
-		encoded_images_[i]._completeFrame = true;
 		encoded_images_[i]._encodedWidth = codec_.simulcastStream[idx].width;
 		encoded_images_[i]._encodedHeight = codec_.simulcastStream[idx].height;
 		encoded_images_[i].set_size(0);
@@ -390,16 +372,15 @@ int32_t NvEncoder::Encode(const VideoFrame& input_frame,
 
 		// Split encoded image up into fragments. This also updates
 		// |encoded_image_|.
-		RTPFragmentationHeader frag_header;
-		RtpFragmentize(&encoded_images_[i], *frame_buffer, frame_packet, &frag_header);
+		RtpFragmentize(&encoded_images_[i], frame_packet);
 
 		// Encoder can skip frames to save bandwidth in which case
 		// |encoded_images_[i]._length| == 0.
 		if (encoded_images_[i].size() > 0) {
 			// Parse QP.
-			h264_bitstream_parser_.ParseBitstream(encoded_images_[i].data(),
-			                                      encoded_images_[i].size());
-			h264_bitstream_parser_.GetLastSliceQp(&encoded_images_[i].qp_);
+			h264_bitstream_parser_.ParseBitstream(encoded_images_[i]);
+			encoded_images_[i].qp_ =
+				h264_bitstream_parser_.GetLastSliceQp().value_or(-1);
 
 			// Deliver encoded image.
 			CodecSpecificInfo codec_specific;
@@ -408,7 +389,7 @@ int32_t NvEncoder::Encode(const VideoFrame& input_frame,
 			codec_specific.codecSpecific.H264.temporal_idx = kNoTemporalIdx;
 			codec_specific.codecSpecific.H264.idr_frame = (info.eFrameType == videoFrameTypeIDR);
 			codec_specific.codecSpecific.H264.base_layer_sync = false;
-			encoded_image_callback_->OnEncodedImage(encoded_images_[i], &codec_specific, &frag_header);
+			encoded_image_callback_->OnEncodedImage(encoded_images_[i], &codec_specific);
 		}
 	}
 
